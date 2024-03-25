@@ -91,6 +91,10 @@ def db_delete_success():
         else:
             return(render_template("db_delete_fail.html")
 
+@app.route("/db_delete", methods=["GET","POST"])
+def db_delete_fail():
+            return(render_template("db_delete_fail.html")
+                   
 @app.route("/end", methods=["GET","POST"])
 def end():
     return(render_template("end.html", r=name))
