@@ -54,6 +54,10 @@ def mj_query():
         input={"prompt": q}
     )
     return(render_template("mj_reply.html",r=r[0]))
-
+    
+@app.route("/end", methods=["GET","POST"])
+def end():
+    return(render_template("end.html", r=name))
+    
 if __name__ == "__main__":
     app.run()
