@@ -79,13 +79,17 @@ def db_query():
     return(render_template("db_query.html",r=r))
 
 @app.route("/db_delete", methods=["GET","POST"])
-def db_delete():
-        conn = sqlite3.connect('log.db')
-        c = conn.execute("delete from customer")
-        conn.commit()
-        c.close()
-        conn.close()
-        return(render_template("db_delete.html",r=name))
+def db_delete_success():
+        password = request.form.get("password")
+        if password == "1234":
+            conn = sqlite3.connect('log.db')
+            c = conn.execute("delete from customer")
+            conn.commit()
+            c.close()
+            conn.close()
+            return(render_template("db_delete_success.html",r=name))
+        else:
+            return(
 
 @app.route("/end", methods=["GET","POST"])
 def end():
