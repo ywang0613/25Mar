@@ -63,6 +63,17 @@ def mj_query():
         input={"prompt": q}
     )
     return(render_template("mj_reply.html",r=r[0]))
+
+def db_query():
+        conn = sqlite3.connect('log.db')
+        c = conn.execute("select * from cusomer")
+        r = ""
+        for row in c:
+            print(row)
+            r = r + str(row)
+        c.close()
+        conn.close()      
+    return(render_template("db_query.html",r=r))
     
 @app.route("/end", methods=["GET","POST"])
 def end():
