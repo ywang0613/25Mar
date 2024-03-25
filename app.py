@@ -28,7 +28,7 @@ def main():
         name = request.form.get("name")
         change_name_flag = 0
         datetime = datetime.datetime.now()
-        conn = sqlite.connect('log.db')
+        conn = sqlite3.connect('log.db')
         c = conn.execute("insert into customer (name, timestamp) values (?,?)",(name,datetime))
         conn.commit()
         c.close()
