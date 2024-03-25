@@ -87,9 +87,9 @@ def db_delete_success():
             conn.commit()
             c.close()
             conn.close()
-            return(render_template("db_delete_success.html",r=name))
+            return(render_template("db_delete_success.html")
         else:
-            return(
+            return(render_template("db_delete_fail.html")
 
 @app.route("/end", methods=["GET","POST"])
 def end():
