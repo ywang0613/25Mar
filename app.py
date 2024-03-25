@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template
+from flask import Markup
 import google.generativeai as palm
 import replicate
 import os
@@ -64,15 +65,17 @@ def mj_query():
     )
     return(render_template("mj_reply.html",r=r[0]))
 
+@app.route("/db_query", methods=["GET","POST"])
 def db_query():
         conn = sqlite3.connect('log.db')
         c = conn.execute("select * from cusomer")
         r = ""
         for row in c:
             print(row)
-            r = r + str(row)
+            r = r+str(row)+"<br>"
         c.close()
-        conn.close()      
+        conn.close()
+        r = Markup(r)
     return(render_template("db_query.html",r=r))
     
 @app.route("/end", methods=["GET","POST"])
