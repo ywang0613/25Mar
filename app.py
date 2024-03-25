@@ -2,6 +2,8 @@ from flask import Flask, request, render_template
 import google.generativeai as palm
 import replicate
 import os
+import sqlite3
+import datetime
 
 palm.configure(api_key="AIzaSyDgmTVwLcUX8D6yi3GeBEIS7y5m9j2CEaw")
 model = {
@@ -25,6 +27,13 @@ def main():
     if change_name_flag = 1:
         name = request.form.get("name")
         change_name_flag = 0
+        datetime = datetime.datetime.now()
+        conn = sqlite.connect('log.db')
+        c = conn.execute("insert into customer (name, timestamp) values (?,?)",(name,datetime))
+        conn.commit()
+        c.close()
+        conn.close()
+        
     return(render_template("main.html",r=name))
 
 @app.route("/palm", methods=["GET","POST"])
